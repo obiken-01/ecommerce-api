@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const productRoutes = require("./routes/productRoutes");
+const errorHandler = require('./middleware/errorHandler');
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/products", productRoutes);
+app.use(errorHandler); 
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
