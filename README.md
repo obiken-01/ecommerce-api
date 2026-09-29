@@ -16,11 +16,72 @@ A REST API for managing e-commerce products using Node.js, Express, MongoDB, and
 ## Base URL 
 http://localhost:5000 
  
-## Product Endpoints - POST /api/products - GET /api/products - GET /api/products/:id - PATCH /api/products/:id - DELETE /api/products/:id 
- 
-## Search / Filter 
-GET /api/products?category=Accessories 
-GET /api/products?search=mouse 
+## API Documentation
+
+### Create Product
+POST /api/products
+
+Purpose: Create a product.
+
+Body:
+```json
+{
+   "name": "Mechanical Keyboard",
+   "description": "RGB keyboard",
+   "price": 1850,
+   "category": "Accessories",
+   "stock": 12
+}
+```
+
+Success: 201 Created
+Possible errors: 400 Bad Request, 500 Internal Server Error
+
+`name`, `description`, `price`, `category`, and `stock` are required. `isAvailable` is optional and defaults to `true`.
+
+### List Products
+GET /api/products
+
+Purpose: Get all products, optionally filtered by category and sorted by a product field.
+
+Query parameters:
+- `category` (optional): Filter by exact category, for example `?category=Accessories`.
+- `sort` (optional): Sort by a product field, for example `?sort=price` or `?sort=-price` for descending order. Defaults to `name`.
+
+Success: 200 OK
+Possible errors: 500 Internal Server Error
+
+### Get Product
+GET /api/products/:id
+
+Purpose: Get a product by its MongoDB ID.
+
+Success: 200 OK
+Possible errors: 400 Bad Request (invalid ID), 404 Not Found, 500 Internal Server Error
+
+### Update Product
+PATCH /api/products/:id
+
+Purpose: Update the provided fields of a product by its MongoDB ID.
+
+Body: Include one or more product fields to update. For example:
+```json
+{
+   "price": 1999,
+   "stock": 8
+}
+```
+
+Success: 200 OK
+Possible errors: 400 Bad Request (invalid ID or product data), 404 Not Found, 500 Internal Server Error
+
+### Delete Product
+DELETE /api/products/:id
+
+Purpose: Delete a product by its MongoDB ID.
+
+Success: 200 OK
+Possible errors: 400 Bad Request (invalid ID), 404 Not Found, 500 Internal Server Error
  
 ## Testing 
 Import/use the Postman collection: MSTCONNECT Capstone 2 API 
