@@ -16,12 +16,26 @@ A REST API for managing e-commerce products using Node.js, Express, MongoDB, and
 ## Base URL 
 http://localhost:5000 
  
-## API Documentation
+## API Endpoints
+
+### Health Check
+GET /
+
+Purpose: Check if the API is running.
+
+Response example:
+```json
+{
+  "message": "E-commerce API is running"
+}
+```
+
+Success: 200 OK
 
 ### Create Product
 POST /api/products
 
-Purpose: Create a product.
+Purpose: Create a new product.
 
 Body:
 ```json
@@ -51,7 +65,7 @@ Query parameters:
 Success: 200 OK
 Possible errors: 500 Internal Server Error
 
-### Get Product
+### Get Product by ID
 GET /api/products/:id
 
 Purpose: Get a product by its MongoDB ID.
